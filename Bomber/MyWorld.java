@@ -16,9 +16,14 @@ public class MyWorld extends World
     public MyWorld()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
+<<<<<<< HEAD
         super(600, 400, 1); 
         prepare();
         prepararCenario();
+=======
+        super(600, 400, 2); 
+        prepare();
+>>>>>>> 2d5aa8f0d17fe3845e93139eb2214df3b2c82b95
     }
     
     /**
@@ -39,6 +44,7 @@ public class MyWorld extends World
         addObject(blocoDestrutivel,307,128);
         playerCiano playerCiano = new playerCiano();
         addObject(playerCiano,145,208);
+<<<<<<< HEAD
         blocoIndestrutivel.setLocation(316,180);
         removeObject(blocoIndestrutivel);
         blocoDestrutivel.setLocation(312,131);
@@ -77,3 +83,7 @@ public class MyWorld extends World
     }
 }
 }
+=======
+    }
+}
+>>>>>>> 2d5aa8f0d17fe3845e93139eb2214df3b2c82b95
