@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=explosao
+comment1.params=
+comment1.target=void\ act()
+comment2.params=
+comment2.target=void\ espalharFogo()
+comment3.params=distancia
+comment3.target=void\ criarEFecharVaoDireita(int)
+comment4.params=distancia
+comment4.target=void\ criarEFecharVaoEsquerda(int)
+numComments=5

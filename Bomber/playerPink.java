@@ -43,11 +43,17 @@ public class playerPink extends Actor
         if (Greenfoot.isKeyDown("J")){
             
             if(activesbombs < maxBomb){
-                bomba newbomba = new bomba();
+                bomba newbomba = new bomba(this);
                 getWorld().addObject(newbomba,getX(),getY());
                 activesbombs++;
             }
         }
         
     }
+    
+    public void reduzirBombaAtiva() {
+    if (activesbombs > 0) {
+        activesbombs--;
+    }
+}
 }
