@@ -20,6 +20,7 @@ public class MyWorld extends World
         super(600, 400, 1); 
         prepare();
         prepararCenario();
+        espalharBlocosDestrutiveis();
     }
     
     /**
@@ -72,6 +73,36 @@ public class MyWorld extends World
             // Desenha os pilares internos
             else if (x % 2 == 0 && y % 2 == 0) {
                 addObject(new blocoIndestrutivel(), posX, posY);
+            }
+        }
+    }
+}
+
+private void espalharBlocosDestrutiveis() 
+{
+    int tamanhoBloco = 24; 
+    int metadeBloco = tamanhoBloco / 2; 
+
+    int colunas = (int) Math.ceil((double) getWidth() / tamanhoBloco); 
+    int linhas = (int) Math.ceil((double) getHeight() / tamanhoBloco);
+
+    for (int x = 1; x < colunas - 1; x++) {
+        for (int y = 1; y < linhas - 1; y++) {
+            
+            if (x % 2 == 0 && y % 2 == 0) {
+                continue; 
+            }
+
+            boolean cantoSuperiorEsq = (x <= 2 && y <= 2);
+            boolean cantoInferiorDir = (x >= colunas - 3 && y >= linhas - 3);
+
+            if (!cantoSuperiorEsq && !cantoInferiorDir) {
+                if (Greenfoot.getRandomNumber(100) < 70) { 
+                    int posX = (x * tamanhoBloco) + metadeBloco;
+                    int posY = (y * tamanhoBloco) + metadeBloco;
+                    addObject(new blocoDestrutivel(), posX, posY);
+                }
+
             }
         }
     }

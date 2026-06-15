@@ -44,18 +44,24 @@ public class playerPink extends Actor
             if(isTouching(blocoIndestrutivel.class) || isTouching(blocoDestrutivel.class)) { setLocation(getX() - velocidade, getY());}
         }
     }
-    
     public void createBomb(){
     
         if (Greenfoot.isKeyDown("J")){
-            
+    
             if(activesbombs < maxBomb){
+                int tamanhoBloco = 24;
+                int metadeBloco = tamanhoBloco / 2;
+    
+                int bombaX = ((getX() / tamanhoBloco) * tamanhoBloco) + metadeBloco;
+                int bombaY = ((getY() / tamanhoBloco) * tamanhoBloco) + metadeBloco;
+    
                 bomba newbomba = new bomba(this);
-                getWorld().addObject(newbomba,getX(),getY());
+    
+                getWorld().addObject(newbomba, bombaX, bombaY);
+    
                 activesbombs++;
             }
         }
-        
     }
     
     public void reduzirBombaAtiva() {
