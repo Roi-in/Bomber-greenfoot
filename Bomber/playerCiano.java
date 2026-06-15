@@ -16,6 +16,13 @@ public class playerCiano extends Actor
     {
        walk();
        createBomb();
+       destruicao();
+    }
+    
+    public void destruicao(){
+        if(isTouching(explosao.class) || isTouching(explosaoLateral.class) || isTouching(explosaoVertical.class) ){
+            getWorld().removeObject(this);
+        }
     }
     
     public void walk(){

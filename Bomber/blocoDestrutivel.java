@@ -14,6 +14,12 @@ public class blocoDestrutivel extends Actor
      */
     public void act()
     {
-        // Add your action code here.
+        destruicao();
+    }
+    
+     public void destruicao(){
+        if(isTouching(explosao.class) || isTouching(explosaoLateral.class) || isTouching(explosaoVertical.class) ){
+            getWorld().removeObject(this);
+        }
     }
 }

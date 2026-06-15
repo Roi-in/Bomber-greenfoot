@@ -17,6 +17,13 @@ public class playerPink extends Actor
     {
        walk();
        createBomb();
+       destruicao();
+    }
+    
+    public void destruicao(){
+        if(isTouching(explosao.class) || isTouching(explosaoLateral.class) || isTouching(explosaoVertical.class) ){
+            getWorld().removeObject(this);
+        }
     }
     
     public void walk(){
@@ -55,5 +62,6 @@ public class playerPink extends Actor
     if (activesbombs > 0) {
         activesbombs--;
     }
+    
 }
 }
