@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class blocoDestrutivel extends Actor
+public class BlocoDestrutivel extends Actor
 {
     /**
      * Act - do whatever the blocoDestrutivel wants to do. This method is called whenever
@@ -18,7 +18,7 @@ public class blocoDestrutivel extends Actor
     }
     
      public void destruicao(){
-        if(isTouching(explosao.class) || isTouching(explosaoLateral.class) || isTouching(explosaoVertical.class) ){
+        if(isTouching(Explosao.class) || isTouching(ExplosaoLateral.class) || isTouching(ExplosaoVertical.class) ){
             getWorld().removeObject(this);
         }
     }

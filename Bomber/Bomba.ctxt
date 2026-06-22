@@ -1,8 +1,8 @@
 #BlueJ class context
-comment0.target=bomba
+comment0.target=Bomba
 comment0.text=\n\ Write\ a\ description\ of\ class\ bomba\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
 comment1.params=jogadorQueCriou
-comment1.target=bomba(greenfoot.Actor)
+comment1.target=Bomba(greenfoot.Actor)
 comment2.params=
 comment2.target=void\ act()
 numComments=3

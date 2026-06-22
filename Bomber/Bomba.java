@@ -6,13 +6,13 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class bomba extends Actor
+public class Bomba extends Actor
 {
     private int tempoParaExplodir = 120;
     private Actor jogador;
     
     
-    public bomba(Actor jogadorQueCriou){
+    public Bomba(Actor jogadorQueCriou){
         this.jogador = jogadorQueCriou;
     }
 
@@ -21,15 +21,15 @@ public class bomba extends Actor
         tempoParaExplodir--;
         if(tempoParaExplodir <= 0){
             
-            if(jogador instanceof playerPink){
-                ((playerPink)jogador).reduzirBombaAtiva();
+            if(jogador instanceof PlayerPink){
+                ((PlayerPink)jogador).reduzirBombaAtiva();
             }
             
-            else if(jogador instanceof playerCiano){
-                ((playerCiano) jogador ).reduzirBombaAtiva();
+            else if(jogador instanceof PlayerCiano){
+                ((PlayerCiano) jogador ).reduzirBombaAtiva();
             }
             
-            getWorld().addObject(new explosao(), getX(), getY());
+            getWorld().addObject(new Explosao(), getX(), getY());
             
             getWorld().removeObject(this);
         }

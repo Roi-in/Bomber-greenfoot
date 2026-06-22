@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class explosaoLateral extends Actor
+public class ExplosaoLateral extends Actor
 {
     private int tempoParaSumir = 30;
     public void act()

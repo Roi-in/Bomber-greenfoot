@@ -29,21 +29,21 @@ public class MyWorld extends World
      */
     private void prepare()
     {
-        playerPink playerPink = new playerPink();
+        PlayerPink playerPink = new PlayerPink();
         addObject(playerPink,256,143);
         playerPink.setLocation(252,141);
         removeObject(playerPink);
-        blocoIndestrutivel blocoIndestrutivel = new blocoIndestrutivel();
-        addObject(blocoIndestrutivel,306,170);
-        playerPink playerPink2 = new playerPink();
+        BlocoIndestrutivel BlocoIndestrutivel = new BlocoIndestrutivel();
+        addObject(BlocoIndestrutivel,306,170);
+        PlayerPink playerPink2 = new PlayerPink();
         addObject(playerPink2,145,164);
-        blocoDestrutivel blocoDestrutivel = new blocoDestrutivel();
-        addObject(blocoDestrutivel,307,128);
-        playerCiano playerCiano = new playerCiano();
+        BlocoDestrutivel BlocoDestrutivel = new BlocoDestrutivel();
+        addObject(BlocoDestrutivel,307,128);
+        PlayerCiano playerCiano = new PlayerCiano();
         addObject(playerCiano,145,208);
 
-        removeObject(blocoIndestrutivel);
-        removeObject(blocoDestrutivel);
+        removeObject(BlocoIndestrutivel);
+        removeObject(BlocoDestrutivel);
         playerPink2.setLocation(37,42);
         playerCiano.setLocation(557,368);
         playerCiano.setLocation(565,364);
@@ -68,11 +68,11 @@ public class MyWorld extends World
 
             // Desenha as bordas
             if (x == 0 || x == colunas - 1 || y == 0 || y == linhas - 1) {
-                addObject(new blocoIndestrutivel(), posX, posY);
+                addObject(new BlocoIndestrutivel(), posX, posY);
             } 
             // Desenha os pilares internos
             else if (x % 2 == 0 && y % 2 == 0) {
-                addObject(new blocoIndestrutivel(), posX, posY);
+                addObject(new BlocoIndestrutivel(), posX, posY);
             }
         }
     }
@@ -100,7 +100,7 @@ private void espalharBlocosDestrutiveis()
                 if (Greenfoot.getRandomNumber(100) < 70) { 
                     int posX = (x * tamanhoBloco) + metadeBloco;
                     int posY = (y * tamanhoBloco) + metadeBloco;
-                    addObject(new blocoDestrutivel(), posX, posY);
+                    addObject(new BlocoDestrutivel(), posX, posY);
                 }
 
             }
