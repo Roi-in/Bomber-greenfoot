@@ -11,14 +11,31 @@ public class Bomba extends Actor
     private int tempoParaExplodir = 120;
     private Actor jogador;
     
+    private GreenfootImage imagemMax;
+    private GreenfootImage imagemMini;
     
     public Bomba(Actor jogadorQueCriou){
         this.jogador = jogadorQueCriou;
+        
+        imagemMax = new GreenfootImage("Bomb-Max.png");
+        imagemMini = new GreenfootImage("Bomb-mini.png");
+        setImage(imagemMax);
     }
+    
 
     public void act()
     {
         tempoParaExplodir--;
+        
+        if (tempoParaExplodir > 0) {
+            
+            if ((tempoParaExplodir / 15) % 2 == 0) {
+                setImage(imagemMax);
+            } else {
+                setImage(imagemMini);
+            }
+        }
+        
         if(tempoParaExplodir <= 0){
             
             if(jogador instanceof PlayerPink){

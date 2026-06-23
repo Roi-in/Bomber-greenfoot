@@ -9,6 +9,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class PlayerCiano extends Player
 {
     public PlayerCiano(){
+        
+        super("Player-Ciano.png", "ciano-andar1.png", "ciano-andar2.png");
+        
         teclaCima = "up";
         teclaBaixo = "down";
         teclaEsq = "left";

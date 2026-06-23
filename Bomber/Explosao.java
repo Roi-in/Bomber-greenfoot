@@ -5,6 +5,9 @@ public class Explosao extends Actor
 {
     private int tempoParaSumir = 30; 
     private boolean jaEspalhou = false; 
+    
+    private GreenfootImage img1 = new GreenfootImage("explosao-central.png");
+    private GreenfootImage img2 = new GreenfootImage("explosao-central2.png");
 
     public void act()
     {
@@ -14,6 +17,13 @@ public class Explosao extends Actor
         }
 
         tempoParaSumir--;
+        
+        if ((tempoParaSumir / 5) % 2 == 0) {
+            setImage(img1);
+        } else {
+            setImage(img2);
+        }
+        
         if (tempoParaSumir <= 0) {
             if (getWorld() != null) {
                 getWorld().removeObject(this);

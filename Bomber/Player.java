@@ -16,6 +16,17 @@ public abstract class Player extends Actor
     protected String teclaEsq;
     protected String teclaDir;
     protected String teclaAcao; 
+    
+    private GreenfootImage imgParado;
+    private GreenfootImage imgAndar1;
+    private GreenfootImage imgAndar2;
+    private int contAnimacao = 0;
+    
+    public Player(String nomeImgParado, String nomeImgAndar1, String nomeImgAndar2) {
+        this.imgParado = new GreenfootImage(nomeImgParado);
+        this.imgAndar1 = new GreenfootImage(nomeImgAndar1);
+        this.imgAndar2 = new GreenfootImage(nomeImgAndar2);
+    }
 
     public void act()
     {
@@ -31,21 +42,44 @@ public abstract class Player extends Actor
     }
     
     public void walk(){
-         if (Greenfoot.isKeyDown(teclaCima)) {
+        boolean seMoveu = false;
+
+        if (Greenfoot.isKeyDown(teclaCima)) {
             setLocation(getX(), getY() - velocidade);
             if(isTouching(BlocoIndestrutivel.class) || isTouching(BlocoDestrutivel.class)) { setLocation(getX(), getY() + velocidade); }
+            seMoveu = true;
         }
-         if (Greenfoot.isKeyDown(teclaBaixo)) {
+        if (Greenfoot.isKeyDown(teclaBaixo)) {
             setLocation(getX(), getY() + velocidade);
             if(isTouching(BlocoIndestrutivel.class) || isTouching(BlocoDestrutivel.class)) {setLocation(getX(), getY() - velocidade);}
+            seMoveu = true;
         }
         if (Greenfoot.isKeyDown(teclaEsq)) {
             setLocation(getX() - velocidade, getY());
             if(isTouching(BlocoIndestrutivel.class) || isTouching(BlocoDestrutivel.class)) { setLocation(getX() + velocidade, getY()); }
+            seMoveu = true;
         }
         if (Greenfoot.isKeyDown(teclaDir)) {
             setLocation(getX() + velocidade, getY());
             if(isTouching(BlocoIndestrutivel.class) || isTouching(BlocoDestrutivel.class)) { setLocation(getX() - velocidade, getY());}
+            seMoveu = true;
+        }
+
+        animar(seMoveu);
+    }
+    
+    private void animar(boolean seMoveu) {
+        if (!seMoveu) {
+            setImage(imgParado);
+            contAnimacao = 0; 
+        } else {
+            contAnimacao++;
+    
+            if ((contAnimacao / 10) % 2 == 0) {
+                setImage(imgAndar1);
+            } else {
+                setImage(imgAndar2);
+            }
         }
     }
     
