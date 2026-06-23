@@ -1,4 +1,5 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;  
+import java.util.List;
 
 public class Explosao extends Actor
 {
@@ -14,43 +15,66 @@ public class Explosao extends Actor
 
         tempoParaSumir--;
         if (tempoParaSumir <= 0) {
-            getWorld().removeObject(this);
+            if (getWorld() != null) {
+                getWorld().removeObject(this);
+            }
         }
     }
 
     private void espalharFogo() {
-    int bloco = 26; 
-    int metade = 13;
+        int bloco = 26; 
+        int metade = 13;
 
-    criarEFecharVaoDireita(bloco);
-    criarEFecharVaoDireita(metade);
+        if (checarECorrerCaminho(getX() + metade, getY(), true)) {
+            checarECorrerCaminho(getX() + bloco, getY(), true);
+        }
 
+        if (checarECorrerCaminho(getX() - metade, getY(), true)) {
+            checarECorrerCaminho(getX() - bloco, getY(), true);
+        }
 
-    criarEFecharVaoEsquerda(bloco);
-    criarEFecharVaoEsquerda(metade);
+        if (checarECorrerCaminho(getX(), getY() + metade, false)) {
+            checarECorrerCaminho(getX(), getY() + bloco, false);
+        }
 
-    getWorld().addObject(new ExplosaoVertical(), getX(), getY() + bloco);
-    getWorld().addObject(new ExplosaoVertical(), getX(), getY() + metade);
-    getWorld().addObject(new ExplosaoVertical(), getX(), getY() - bloco);
-    getWorld().addObject(new ExplosaoVertical(), getX(), getY() - metade);
-    
-    getWorld().addObject(new ExplosaoLateral(), getX() + bloco, getY());
-    getWorld().addObject(new ExplosaoLateral(), getX() + metade, getY());
-    getWorld().addObject(new ExplosaoLateral(), getX()- bloco, getY() );
-    getWorld().addObject(new ExplosaoLateral(), getX() - metade, getY());
-}
+        if (checarECorrerCaminho(getX(), getY() - metade, false)) {
+            checarECorrerCaminho(getX(), getY() - bloco, false);
+        }
+    }
 
+    private boolean checarECorrerCaminho(int x, int y, boolean ehHorizontal) {
+        if (temBlocoIndestrutivel(x, y)) {
+            return false; 
+        }
 
-private void criarEFecharVaoDireita(int distancia) {
-    ExplosaoLateral f = new ExplosaoLateral();
-    getWorld().addObject(f, getX() + distancia, getY());
-    f.setRotation(90);
-}
+        if (temEDestróiBlocoDestrutivel(x, y)) {
+            criarFogoNoAlvo(x, y, ehHorizontal);
+            return false; 
+        }
 
-private void criarEFecharVaoEsquerda(int distancia) {
-    ExplosaoLateral f = new ExplosaoLateral();
-    getWorld().addObject(f, getX() - distancia, getY());
-    f.setRotation(90);
-}
+        criarFogoNoAlvo(x, y, ehHorizontal);
+        return true; 
+    }
 
+    private void criarFogoNoAlvo(int x, int y, boolean ehHorizontal) {
+        if (ehHorizontal) {
+            getWorld().addObject(new ExplosaoLateral(), x, y);
+        } else {
+            getWorld().addObject(new ExplosaoVertical(), x, y);
+        }
+    }
+
+    private boolean temBlocoIndestrutivel(int x, int y) {
+        List<BlocoIndestrutivel> blocos = getWorld().getObjectsAt(x, y, BlocoIndestrutivel.class);
+        return !blocos.isEmpty();
+    }
+
+    private boolean temEDestróiBlocoDestrutivel(int x, int y) {
+        List<BlocoDestrutivel> blocos = getWorld().getObjectsAt(x, y, BlocoDestrutivel.class);
+        if (!blocos.isEmpty()) {
+            getWorld().removeObject(blocos.get(0));
+            return true;
+        }
+        return false;
+    }
 }
