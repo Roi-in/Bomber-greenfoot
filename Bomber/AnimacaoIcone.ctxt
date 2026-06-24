@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=AnimacaoIcone
+comment1.params=imagens
+comment1.target=AnimacaoIcone(greenfoot.GreenfootImage[])
+comment2.params=
+comment2.target=void\ act()
+comment2.text=\r\n\ O\ act\ da\ classe\ m\u00E3e\ gerencia\ a\ anima\u00E7\u00E3o\ automaticamente.\r\n
+comment3.params=
+comment3.target=void\ animar()
+comment3.text=\r\n\ M\u00E9todo\ gen\u00E9rico\ que\ funciona\ para\ qualquer\ lista\ de\ imagens\ recebida\r\n
+numComments=4
