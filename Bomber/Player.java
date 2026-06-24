@@ -46,22 +46,22 @@ public abstract class Player extends Actor
 
         if (Greenfoot.isKeyDown(teclaCima)) {
             setLocation(getX(), getY() - velocidade);
-            if(isTouching(BlocoIndestrutivel.class) || isTouching(BlocoDestrutivel.class)) { setLocation(getX(), getY() + velocidade); }
+            if(estaColidindo()) { setLocation(getX(), getY() + velocidade); }
             seMoveu = true;
         }
         if (Greenfoot.isKeyDown(teclaBaixo)) {
             setLocation(getX(), getY() + velocidade);
-            if(isTouching(BlocoIndestrutivel.class) || isTouching(BlocoDestrutivel.class)) {setLocation(getX(), getY() - velocidade);}
+            if(estaColidindo()) { setLocation(getX(), getY() - velocidade); }
             seMoveu = true;
         }
         if (Greenfoot.isKeyDown(teclaEsq)) {
             setLocation(getX() - velocidade, getY());
-            if(isTouching(BlocoIndestrutivel.class) || isTouching(BlocoDestrutivel.class)) { setLocation(getX() + velocidade, getY()); }
+            if(estaColidindo()) { setLocation(getX() + velocidade, getY()); }
             seMoveu = true;
         }
         if (Greenfoot.isKeyDown(teclaDir)) {
             setLocation(getX() + velocidade, getY());
-            if(isTouching(BlocoIndestrutivel.class) || isTouching(BlocoDestrutivel.class)) { setLocation(getX() - velocidade, getY());}
+            if(estaColidindo()) { setLocation(getX() - velocidade, getY()); }
             seMoveu = true;
         }
 
@@ -103,5 +103,18 @@ public abstract class Player extends Actor
         if (activesbombs > 0) {
             activesbombs--;
         }
+    }
+    
+    private boolean estaColidindo() {
+        if (isTouching(BlocoIndestrutivel.class) || isTouching(BlocoDestrutivel.class)) {
+            return true;
+        }
+        
+        Bomba bomba = (Bomba) getOneIntersectingObject(Bomba.class);
+        if (bomba != null && bomba.temColisao()) {
+            return true;
+        }
+        
+        return false;
     }
 }

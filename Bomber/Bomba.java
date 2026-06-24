@@ -14,6 +14,8 @@ public class Bomba extends Actor
     private GreenfootImage imagemMax;
     private GreenfootImage imagemMini;
     
+    private boolean colisaoAtiva = false;
+    
     public Bomba(Actor jogadorQueCriou){
         this.jogador = jogadorQueCriou;
         
@@ -26,6 +28,12 @@ public class Bomba extends Actor
     public void act()
     {
         tempoParaExplodir--;
+        
+        if (!colisaoAtiva) {
+            if (!isTouching(Player.class)) {
+                colisaoAtiva = true;
+            }
+        }
         
         if (tempoParaExplodir > 0) {
             
@@ -51,5 +59,9 @@ public class Bomba extends Actor
             getWorld().removeObject(this);
         }
         
+    }
+    
+    public boolean temColisao() {
+        return colisaoAtiva;
     }
 }
