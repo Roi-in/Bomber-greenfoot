@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class PlayerPink extends Player{
     public PlayerPink(){
-        
+    
         super("player-pink.png", "pink-andar1.png", "pink-andar2.png");
 
         teclaCima = "w";
@@ -16,6 +16,7 @@ public class PlayerPink extends Player{
         teclaEsq = "a";
         teclaDir = "d";
         teclaAcao = "j";
-}
+    }   
+    
 }
 

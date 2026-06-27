@@ -37,7 +37,17 @@ public abstract class Player extends Actor
     
     public void destruicao(){
         if(isTouching(Explosao.class) || isTouching(ExplosaoLateral.class) || isTouching(ExplosaoVertical.class) ){
-            getWorld().removeObject(this);
+            
+            String vencedor = "Empate"; 
+            
+            if (this instanceof PlayerCiano) {
+                vencedor = "Pink"; 
+            } 
+            else if (this instanceof PlayerPink) {
+                vencedor = "Ciano";
+            }
+            
+            Greenfoot.setWorld(new TelaVitoria(vencedor));
         }
     }
     
