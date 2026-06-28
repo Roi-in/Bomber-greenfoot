@@ -9,14 +9,14 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Bomba extends Actor
 {
     private int tempoParaExplodir = 120;
-    private Actor jogador;
+    private Player jogador;
     
     private GreenfootImage imagemMax;
     private GreenfootImage imagemMini;
     
     private boolean colisaoAtiva = false;
     
-    public Bomba(Actor jogadorQueCriou){
+    public Bomba(Player jogadorQueCriou){
         this.jogador = jogadorQueCriou;
         
         imagemMax = new GreenfootImage("Bomb-Max.png");
@@ -45,15 +45,8 @@ public class Bomba extends Actor
         }
         
         if(tempoParaExplodir <= 0){
-            
-            if(jogador instanceof PlayerPink){
-                ((PlayerPink)jogador).reduzirBombaAtiva();
-            }
-            
-            else if(jogador instanceof PlayerCiano){
-                ((PlayerCiano) jogador ).reduzirBombaAtiva();
-            }
-            
+            jogador.reduzirBombaAtiva();
+            int poder = jogador.getPoderDaChama();
             getWorld().addObject(new Explosao(), getX(), getY());
             
             getWorld().removeObject(this);

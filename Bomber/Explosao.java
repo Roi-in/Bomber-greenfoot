@@ -81,8 +81,24 @@ public class Explosao extends Actor
 
     private boolean temEDestróiBlocoDestrutivel(int x, int y) {
         List<BlocoDestrutivel> blocos = getWorld().getObjectsAt(x, y, BlocoDestrutivel.class);
+        
         if (!blocos.isEmpty()) {
             getWorld().removeObject(blocos.get(0));
+            
+            // 2. SISTEMA DE DROPS: 30% de chance de gerar um item
+            if (Greenfoot.getRandomNumber(100) < 30) {
+                int qualItem = Greenfoot.getRandomNumber(3); 
+                
+                // Coloca o item sorteado na exata posição (x, y) onde o bloco estava
+                if (qualItem == 0) {
+                    getWorld().addObject(new Velocidade(), x, y);
+                } else if (qualItem == 1) {
+                    getWorld().addObject(new MaisBomba(), x, y);
+                } else if (qualItem == 2) {
+                    getWorld().addObject(new Chama(), x, y);
+                }
+            }
+            
             return true;
         }
         return false;
