@@ -110,7 +110,6 @@ public abstract class Player extends Actor
                 getWorld().addObject(newbomba, bombaX, bombaY);
                 activesbombs++;
                 
-                // 3. Trava o botão. Ele não cria mais bombas até você soltar!
                 botaoPronto = false; 
             }
             }
@@ -126,7 +125,7 @@ public abstract class Player extends Actor
         }
     }
     
-    // --- MÉTODOS DOS BOOSTS ---
+    // METODOS DOS BOOSTS
     public void aumentarVelocidade() {
         velocidade = velocidade + 0.5;
     }

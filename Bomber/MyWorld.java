@@ -15,7 +15,6 @@ public class MyWorld extends World
      */
     public MyWorld()
     {    
-        // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
 
         super(600, 400, 1); 
         prepare();
@@ -51,12 +50,9 @@ public class MyWorld extends World
     
    private void prepararCenario()
 {
-    // Coloque aqui o tamanho exato que você está usando agora (ex: 24)
     int tamanhoBloco = 24; 
     int metadeBloco = tamanhoBloco / 2; 
     
-    // O comando Math.ceil força o arredondamento para CIMA.
-    // Assim, se faltar um pedaço, ele cria uma fileira extra e esconde a sobra fora da tela!
     int colunas = (int) Math.ceil((double) getWidth() / tamanhoBloco); 
     int linhas = (int) Math.ceil((double) getHeight() / tamanhoBloco);
 
@@ -66,11 +62,9 @@ public class MyWorld extends World
             int posX = (x * tamanhoBloco) + metadeBloco;
             int posY = (y * tamanhoBloco) + metadeBloco;
 
-            // Desenha as bordas
             if (x == 0 || x == colunas - 1 || y == 0 || y == linhas - 1) {
                 addObject(new BlocoIndestrutivel(), posX, posY);
             } 
-            // Desenha os pilares internos
             else if (x % 2 == 0 && y % 2 == 0) {
                 addObject(new BlocoIndestrutivel(), posX, posY);
             }

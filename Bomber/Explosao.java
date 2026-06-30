@@ -6,8 +6,18 @@ public class Explosao extends Actor
     private int tempoParaSumir = 30; 
     private boolean jaEspalhou = false; 
     
+    private int poderDaChama = 1;
+    
     private GreenfootImage img1 = new GreenfootImage("explosao-central.png");
     private GreenfootImage img2 = new GreenfootImage("explosao-central2.png");
+
+    public Explosao(int poder) {
+        this.poderDaChama = poder;
+    }
+    
+    public Explosao() {
+        this.poderDaChama = 1;
+    }
 
     public void act()
     {
@@ -32,38 +42,35 @@ public class Explosao extends Actor
     }
 
     private void espalharFogo() {
-        int bloco = 26; 
-        int metade = 13;
+        int passo = 13; 
 
-        if (checarECorrerCaminho(getX() + metade, getY(), true)) {
-            checarECorrerCaminho(getX() + bloco, getY(), true);
+        int[] dx = {1, -1, 0, 0};
+        int[] dy = {0, 0, 1, -1};
+
+        for (int i = 0; i < 4; i++) {
+            
+            int limite = poderDaChama * 2; 
+            
+            for (int j = 1; j <= limite; j++) {
+                
+                int proximoX = getX() + (dx[i] * j * passo);
+                int proximoY = getY() + (dy[i] * j * passo);
+                
+                boolean ehHorizontal = (dx[i] != 0); 
+
+                if (temBlocoIndestrutivel(proximoX, proximoY)) {
+                    break; 
+                }
+
+                if (temEDestroiBlocoDestrutivel(proximoX, proximoY)) {
+                    criarFogoNoAlvo(proximoX, proximoY, ehHorizontal);
+                    break;
+                }
+
+                criarFogoNoAlvo(proximoX, proximoY, ehHorizontal);
+            }
         }
-
-        if (checarECorrerCaminho(getX() - metade, getY(), true)) {
-            checarECorrerCaminho(getX() - bloco, getY(), true);
-        }
-
-        if (checarECorrerCaminho(getX(), getY() + metade, false)) {
-            checarECorrerCaminho(getX(), getY() + bloco, false);
-        }
-
-        if (checarECorrerCaminho(getX(), getY() - metade, false)) {
-            checarECorrerCaminho(getX(), getY() - bloco, false);
-        }
-    }
-
-    private boolean checarECorrerCaminho(int x, int y, boolean ehHorizontal) {
-        if (temBlocoIndestrutivel(x, y)) {
-            return false; 
-        }
-
-        if (temEDestróiBlocoDestrutivel(x, y)) {
-            criarFogoNoAlvo(x, y, ehHorizontal);
-            return false; 
-        }
-
-        criarFogoNoAlvo(x, y, ehHorizontal);
-        return true; 
+    
     }
 
     private void criarFogoNoAlvo(int x, int y, boolean ehHorizontal) {
@@ -79,17 +86,15 @@ public class Explosao extends Actor
         return !blocos.isEmpty();
     }
 
-    private boolean temEDestróiBlocoDestrutivel(int x, int y) {
+    private boolean temEDestroiBlocoDestrutivel(int x, int y) {
         List<BlocoDestrutivel> blocos = getWorld().getObjectsAt(x, y, BlocoDestrutivel.class);
         
         if (!blocos.isEmpty()) {
             getWorld().removeObject(blocos.get(0));
             
-            // 2. SISTEMA DE DROPS: 30% de chance de gerar um item
             if (Greenfoot.getRandomNumber(100) < 30) {
                 int qualItem = Greenfoot.getRandomNumber(3); 
                 
-                // Coloca o item sorteado na exata posição (x, y) onde o bloco estava
                 if (qualItem == 0) {
                     getWorld().addObject(new Velocidade(), x, y);
                 } else if (qualItem == 1) {
@@ -98,7 +103,6 @@ public class Explosao extends Actor
                     getWorld().addObject(new Chama(), x, y);
                 }
             }
-            
             return true;
         }
         return false;

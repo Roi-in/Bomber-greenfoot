@@ -47,8 +47,7 @@ public class Bomba extends Actor
         if(tempoParaExplodir <= 0){
             jogador.reduzirBombaAtiva();
             int poder = jogador.getPoderDaChama();
-            getWorld().addObject(new Explosao(), getX(), getY());
-            
+            getWorld().addObject(new Explosao(poder), getX(), getY());            
             getWorld().removeObject(this);
         }
         
