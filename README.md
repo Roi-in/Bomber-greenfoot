@@ -56,12 +56,12 @@ Para rodar ou modificar o projeto, você precisará de:
 ## 🕹️ Controles
 
 * **Player Ciano (Azul):**
-  * Movimentação: Teclas `W`, `A`, `S`, `D`
-  * Posicionar Bomba: Tecla `Espaço` *(ou conforme configurado no código)*
+  * Movimentação: Setas Direcionais (`↑`, `↓`, `←`, `→`)
+  * Posicionar Bomba: Tecla `5`
 
 * **Player Pink (Rosa):**
-  * Movimentação: Setas Direcionais (`↑`, `↓`, `←`, `→`)
-  * Posicionar Bomba: Tecla `Enter` *(ou conforme configurado no código)*
+  * Movimentação: Teclas `W`, `A`, `S`, `D`
+  * Posicionar Bomba: Tecla `J`
 
 ---
 
